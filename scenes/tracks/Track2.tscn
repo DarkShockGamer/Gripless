@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://track2_001"]
+
+[node name="Track2" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+position = Vector2(-2000, -2000)
+size = Vector2(6000, 6000)
+color = Color(0.1, 0.14, 0.2, 1)
+
+[node name="TrackSurface" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(
+	80, 300,
+	200, 200,
+	800, 200,
+	900, 300,
+	900, 420,
+	800, 500,
+	600, 500,
+	600, 620,
+	800, 620,
+	900, 700,
+	900, 820,
+	800, 900,
+	200, 900,
+	80, 820,
+	80, 700,
+	200, 620,
+	400, 620,
+	400, 500,
+	200, 500,
+	80, 420,
+	80, 300
+)
+color = Color(0.28, 0.30, 0.36, 1)
+
+[node name="InfieldA" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(200, 320, 780, 320, 780, 420, 200, 420)
+color = Color(0.14, 0.20, 0.28, 1)
+
+[node name="InfieldB" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(200, 700, 780, 700, 780, 800, 200, 800)
+color = Color(0.14, 0.20, 0.28, 1)
+
+[node name="WaterDecor" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(920, 200, 1100, 200, 1100, 900, 920, 900)
+color = Color(0.1, 0.2, 0.5, 1)
+
+[node name="Barriers" type="StaticBody2D" parent="."]
+
+[node name="OuterBarrier" type="CollisionPolygon2D" parent="Barriers"]
+polygon = PackedVector2Array(
+	80, 300,
+	200, 200,
+	800, 200,
+	900, 300,
+	900, 420,
+	800, 500,
+	600, 500,
+	600, 620,
+	800, 620,
+	900, 700,
+	900, 820,
+	800, 900,
+	200, 900,
+	80, 820,
+	80, 700,
+	200, 620,
+	400, 620,
+	400, 500,
+	200, 500,
+	80, 420
+)
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+
+[node name="OOBShape" type="CollisionPolygon2D" parent="OutOfBounds"]
+polygon = PackedVector2Array(-500, -500, 2000, -500, 2000, 1500, -500, 1500)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(150, 380)
+rotation = -1.5708
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(150, 420)
+rotation = -1.5708
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(150, 460)
+rotation = -1.5708
+
+[node name="SpawnPoint4" type="Marker2D" parent="."]
+position = Vector2(150, 500)
+rotation = -1.5708

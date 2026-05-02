@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://track3_001"]
+
+[node name="Track3" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+position = Vector2(-2000, -2000)
+size = Vector2(6000, 6000)
+color = Color(0.15, 0.18, 0.12, 1)
+
+[node name="MountainBase" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 1400, 0, 1400, 1000, 0, 1000)
+color = Color(0.2, 0.25, 0.17, 1)
+
+[node name="TrackSurface" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(
+	100, 150,
+	300, 100,
+	500, 120,
+	650, 200,
+	700, 350,
+	680, 500,
+	600, 600,
+	500, 640,
+	400, 620,
+	320, 560,
+	280, 460,
+	260, 350,
+	280, 240,
+	180, 240,
+	160, 350,
+	180, 480,
+	220, 600,
+	300, 720,
+	420, 820,
+	600, 880,
+	800, 880,
+	950, 820,
+	1050, 700,
+	1100, 560,
+	1100, 420,
+	1060, 300,
+	960, 220,
+	860, 180,
+	760, 180,
+	700, 200,
+	650, 200
+)
+color = Color(0.38, 0.36, 0.34, 1)
+
+[node name="RockFormation1" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(380, 300, 460, 280, 500, 340, 460, 380, 380, 360)
+color = Color(0.45, 0.42, 0.38, 1)
+
+[node name="RockFormation2" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(700, 600, 760, 580, 800, 640, 760, 680, 700, 660)
+color = Color(0.45, 0.42, 0.38, 1)
+
+[node name="Barriers" type="StaticBody2D" parent="."]
+
+[node name="OuterBarrier" type="CollisionPolygon2D" parent="Barriers"]
+polygon = PackedVector2Array(
+	100, 150,
+	300, 100,
+	500, 120,
+	650, 200,
+	700, 350,
+	680, 500,
+	600, 600,
+	500, 640,
+	400, 620,
+	320, 560,
+	280, 460,
+	260, 350,
+	280, 240,
+	180, 240,
+	160, 350,
+	180, 480,
+	220, 600,
+	300, 720,
+	420, 820,
+	600, 880,
+	800, 880,
+	950, 820,
+	1050, 700,
+	1100, 560,
+	1100, 420,
+	1060, 300,
+	960, 220,
+	860, 180,
+	760, 180,
+	700, 200
+)
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+
+[node name="OOBShape" type="CollisionPolygon2D" parent="OutOfBounds"]
+polygon = PackedVector2Array(-500, -500, 2000, -500, 2000, 1500, -500, 1500)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(200, 200)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(240, 230)
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(200, 260)
+
+[node name="SpawnPoint4" type="Marker2D" parent="."]
+position = Vector2(240, 290)

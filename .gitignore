@@ -1,0 +1,11 @@
+# Godot 4 specific
+.godot/
+*.translation
+*.import
+export.cfg
+export_presets.cfg
+.mono/
+.xrtools/
+*.uid
+android/
+build/

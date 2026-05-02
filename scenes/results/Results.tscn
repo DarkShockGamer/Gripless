@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://results_001"]
+
+[ext_resource type="Script" path="res://scenes/results/Results.gd" id="1_results"]
+
+[node name="Results" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_results")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -260.0
+offset_right = 280.0
+offset_bottom = 260.0
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "RACE RESULTS"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(0.914, 0.271, 0.376, 1)
+
+[node name="HSep" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="ScoresContainer" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 160)
+theme_override_constants/separation = 8
+
+[node name="HSep2" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="CurrencyEarned" type="Label" parent="VBox"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 0.843, 0, 1)
+
+[node name="BtnRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MenuBtn" type="Button" parent="VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MAIN MENU"
+custom_minimum_size = Vector2(0, 48)
+
+[node name="PlayAgainBtn" type="Button" parent="VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PLAY AGAIN"
+custom_minimum_size = Vector2(0, 48)
+
+[connection signal="pressed" from="VBox/BtnRow/MenuBtn" to="." method="_on_menu_btn_pressed"]
+[connection signal="pressed" from="VBox/BtnRow/PlayAgainBtn" to="." method="_on_play_again_btn_pressed"]
