@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://track1_001"]
+
+[node name="Track1" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+position = Vector2(-2000, -2000)
+size = Vector2(6000, 6000)
+color = Color(0.18, 0.18, 0.18, 1)
+
+[node name="TrackSurface" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(
+	100, 200,
+	400, 100,
+	900, 80,
+	1180, 200,
+	1200, 400,
+	1180, 600,
+	1100, 700,
+	900, 800,
+	700, 820,
+	640, 760,
+	640, 560,
+	560, 500,
+	480, 560,
+	480, 760,
+	400, 820,
+	200, 800,
+	100, 700,
+	60, 500,
+	60, 350,
+	100, 200
+)
+color = Color(0.32, 0.32, 0.32, 1)
+
+[node name="InfieldBlock" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(
+	200, 300,
+	400, 220,
+	800, 220,
+	950, 340,
+	950, 500,
+	850, 580,
+	700, 600,
+	580, 580,
+	480, 500,
+	480, 340,
+	580, 260,
+	200, 300
+)
+color = Color(0.22, 0.28, 0.22, 1)
+
+[node name="TrackLines" type="Line2D" parent="."]
+points = PackedVector2Array(640, 200, 640, 820)
+width = 3.0
+default_color = Color(1, 1, 0, 0.6)
+
+[node name="Barriers" type="StaticBody2D" parent="."]
+
+[node name="OuterBarrier" type="CollisionPolygon2D" parent="Barriers"]
+polygon = PackedVector2Array(
+	100, 200,
+	400, 100,
+	900, 80,
+	1180, 200,
+	1200, 400,
+	1180, 600,
+	1100, 700,
+	900, 800,
+	700, 820,
+	640, 760,
+	640, 560,
+	560, 500,
+	480, 560,
+	480, 760,
+	400, 820,
+	200, 800,
+	100, 700,
+	60, 500,
+	60, 350
+)
+
+[node name="OutOfBounds" type="Area2D" parent="."]
+
+[node name="OOBShape" type="CollisionPolygon2D" parent="OutOfBounds"]
+polygon = PackedVector2Array(-500, -500, 2000, -500, 2000, 1500, -500, 1500)
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(200, 450)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(250, 500)
+rotation = 0.1
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(200, 550)
+
+[node name="SpawnPoint4" type="Marker2D" parent="."]
+position = Vector2(250, 600)
+rotation = 0.1

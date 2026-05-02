@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://hud_001"]
+
+[ext_resource type="Script" path="res://scenes/hud/HUD.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_hud")
+
+[node name="HUDRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TopRight" type="HBoxContainer" parent="HUDRoot"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 50.0
+
+[node name="SpeedLabel" type="Label" parent="HUDRoot/TopRight"]
+layout_mode = 2
+text = "0 km/h"
+size_flags_horizontal = 3
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+
+[node name="TopCenter" type="HBoxContainer" parent="HUDRoot"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 10.0
+offset_right = 80.0
+offset_bottom = 50.0
+
+[node name="TimerLabel" type="Label" parent="HUDRoot/TopCenter"]
+layout_mode = 2
+text = "3:00"
+size_flags_horizontal = 3
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 1, 0.8, 1)
+
+[node name="TandemLabel" type="Label" parent="HUDRoot"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+offset_left = -120.0
+offset_top = -30.0
+offset_right = 120.0
+offset_bottom = 30.0
+visible = false
+text = "TANDEM!"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+
+[node name="BottomCenter" type="VBoxContainer" parent="HUDRoot"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -10.0
+theme_override_constants/separation = 4
+
+[node name="DriftScore" type="Label" parent="HUDRoot/BottomCenter"]
+layout_mode = 2
+text = "DRIFT: 0"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.914, 0.271, 0.376, 1)
+
+[node name="ComboLabel" type="Label" parent="HUDRoot/BottomCenter"]
+layout_mode = 2
+text = ""
+horizontal_alignment = 1
+visible = false
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 0.843, 0, 1)
+
+[node name="DriftBar" type="ProgressBar" parent="HUDRoot/BottomCenter"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 16)
+value = 0

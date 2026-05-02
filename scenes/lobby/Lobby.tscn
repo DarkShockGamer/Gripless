@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://lobby_001"]
+
+[ext_resource type="Script" path="res://scenes/lobby/Lobby.gd" id="1_lobby"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_lobby")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.12, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "LOBBY"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0.914, 0.271, 0.376, 1)
+
+[node name="HSep" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="PlayerListTitle" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Players (up to 4):"
+theme_override_font_sizes/font_size = 18
+
+[node name="PlayerList" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+theme_override_constants/separation = 6
+
+[node name="HSep2" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="TrackLabel" type="Label" parent="VBox/HBox"]
+layout_mode = 2
+text = "Track: "
+vertical_alignment = 1
+
+[node name="TrackSelect" type="OptionButton" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 40)
+
+[node name="StatusLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Waiting for players..."
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.7, 0.7, 0.9, 1)
+
+[node name="BtnRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BackBtn" type="Button" parent="VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "BACK"
+custom_minimum_size = Vector2(0, 48)
+
+[node name="ReadyBtn" type="Button" parent="VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "READY"
+custom_minimum_size = Vector2(0, 48)
+
+[node name="StartBtn" type="Button" parent="VBox/BtnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "START GAME"
+disabled = true
+custom_minimum_size = Vector2(0, 48)
+
+[connection signal="pressed" from="VBox/BtnRow/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="VBox/BtnRow/ReadyBtn" to="." method="_on_ready_btn_pressed"]
+[connection signal="pressed" from="VBox/BtnRow/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="item_selected" from="VBox/HBox/TrackSelect" to="." method="_on_track_select_item_selected"]
