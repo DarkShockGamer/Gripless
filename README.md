@@ -14,7 +14,7 @@ A multiplayer top-down drift-tandem racing game built with Godot 4 (GDScript).
 ## How to Play
 
 ### Setup
-1. Open project in Godot 4.2+
+1. Open project in **Godot 4.6.2**
 2. Run the project (F5)
 
 ### Controls
@@ -58,7 +58,7 @@ shaders/
 ```
 
 ## Technical Details
-- **Engine**: Godot 4.2+
+- **Engine**: Godot 4.6.2
 - **Networking**: ENet peer-to-peer, host-as-server model, port 7777
 - **Physics**: RigidBody2D with custom lateral grip/drift forces
 - **Sync**: MultiplayerSynchronizer for positions + RPC for scoring

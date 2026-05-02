@@ -34,7 +34,7 @@ func _refresh_player_list(_id) -> void:
 	for child in player_list.get_children():
 		child.queue_free()
 	for pid in GameState.players:
-		var p := GameState.players[pid]
+		var p: Dictionary = GameState.players[pid]
 		var row := HBoxContainer.new()
 		var name_lbl := Label.new()
 		name_lbl.text = p["name"] + (" (You)" if pid == GameState.local_peer_id else "")

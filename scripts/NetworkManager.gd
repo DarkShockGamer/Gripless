@@ -56,7 +56,7 @@ func _on_peer_connected(peer_id: int) -> void:
 	if multiplayer.is_server():
 		# Send current player list to newly connected peer
 		for pid in GameState.players:
-			var p := GameState.players[pid]
+			var p: Dictionary = GameState.players[pid]
 			register_player.rpc_id(peer_id, pid, p["name"], p["car_id"])
 
 func _on_peer_disconnected(peer_id: int) -> void:

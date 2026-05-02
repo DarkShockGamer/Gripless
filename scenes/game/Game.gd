@@ -111,7 +111,7 @@ func _update_fog() -> void:
 func _check_tandem() -> void:
 	var drifters := []
 	for pid in _cars:
-		var c := _cars[pid]
+		var c = _cars[pid]
 		if c.is_drifting:
 			drifters.append(c)
 	if drifters.size() < 2:
