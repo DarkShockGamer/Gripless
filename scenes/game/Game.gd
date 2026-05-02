@@ -31,7 +31,7 @@ func _load_track() -> void:
 	var track_path: String = TRACK_SCENES.get(track_id, TRACK_SCENES["track1"])
 	var track_scene := load(track_path)
 	if track_scene:
-		var track := track_scene.instantiate()
+		var track: Node = track_scene.instantiate()
 		add_child(track)
 		# Collect spawn points
 		for child in track.get_children():
@@ -52,7 +52,7 @@ func _spawn_cars() -> void:
 	for pid in GameState.players:
 		var car := CAR_SCENE.instantiate()
 		car.name = str(pid)
-		var local := (pid == multiplayer.get_unique_id())
+		var local: bool = (pid == multiplayer.get_unique_id())
 		cars_node.add_child(car)
 		car.setup(pid, GameState.players[pid]["car_id"], local)
 		# Spawn position
@@ -118,7 +118,7 @@ func _check_tandem() -> void:
 		return
 	for i in drifters.size():
 		for j in range(i + 1, drifters.size()):
-			var dist := drifters[i].global_position.distance_to(drifters[j].global_position)
+			var dist: float = drifters[i].global_position.distance_to(drifters[j].global_position)
 			if dist < TANDEM_DISTANCE:
 				if multiplayer.is_server():
 					drifters[i].apply_tandem_bonus()
