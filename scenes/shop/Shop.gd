@@ -49,12 +49,12 @@ func _populate_shop() -> void:
 func _make_car_card(car: Dictionary) -> Control:
 	var panel := PanelContainer.new()
 	var vbox := VBoxContainer.new()
-	vbox.theme_override_constants = {"separation": 6}
+	vbox.add_theme_constant_override("separation", 6)
 	panel.add_child(vbox)
 
 	var name_lbl := Label.new()
 	name_lbl.text = car["name"]
-	name_lbl.theme_override_font_sizes = {"font_size": 22}
+	name_lbl.add_theme_font_size_override("font_size", 22)
 	name_lbl.modulate = Color(0.914, 0.271, 0.376)
 	vbox.add_child(name_lbl)
 

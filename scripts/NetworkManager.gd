@@ -26,13 +26,13 @@ func host_game(player_name: String, car_id: String) -> void:
 	var err := peer.create_server(PORT, MAX_CLIENTS)
 	if err != OK:
 		push_error("Failed to create server: " + str(err))
-		emit_signal("connection_failed")
+		connection_failed.emit()
 		return
 	multiplayer.multiplayer_peer = peer
 	GameState.reset()
 	GameState.local_peer_id = 1
 	GameState.add_player(1, _player_name, _car_id)
-	emit_signal("connection_succeeded")
+	connection_succeeded.emit()
 
 func join_game(ip: String, player_name: String, car_id: String) -> void:
 	_player_name = player_name
@@ -41,7 +41,7 @@ func join_game(ip: String, player_name: String, car_id: String) -> void:
 	var err := peer.create_client(ip, PORT)
 	if err != OK:
 		push_error("Failed to connect: " + str(err))
-		emit_signal("connection_failed")
+		connection_failed.emit()
 		return
 	multiplayer.multiplayer_peer = peer
 
@@ -52,7 +52,7 @@ func disconnect_from_game() -> void:
 	GameState.reset()
 
 func _on_peer_connected(peer_id: int) -> void:
-	emit_signal("player_connected", peer_id)
+	player_connected.emit(peer_id)
 	if multiplayer.is_server():
 		# Send current player list to newly connected peer
 		for pid in GameState.players:
@@ -61,17 +61,17 @@ func _on_peer_connected(peer_id: int) -> void:
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	GameState.remove_player(peer_id)
-	emit_signal("player_disconnected", peer_id)
+	player_disconnected.emit(peer_id)
 	notify_player_left.rpc(peer_id)
 
 func _on_connected_to_server() -> void:
 	GameState.reset()
 	GameState.local_peer_id = multiplayer.get_unique_id()
 	register_player.rpc_id(1, multiplayer.get_unique_id(), _player_name, _car_id)
-	emit_signal("connection_succeeded")
+	connection_succeeded.emit()
 
 func _on_connection_failed() -> void:
-	emit_signal("connection_failed")
+	connection_failed.emit()
 
 func _on_server_disconnected() -> void:
 	disconnect_from_game()
@@ -97,7 +97,7 @@ func set_track(track_id: String) -> void:
 @rpc("authority", "call_local", "reliable")
 func start_game() -> void:
 	GameState.session_active = true
-	emit_signal("game_start_signal")
+	game_start_signal.emit()
 	get_tree().change_scene_to_file("res://scenes/game/Game.tscn")
 
 @rpc("any_peer", "call_local", "reliable")

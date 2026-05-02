@@ -22,17 +22,17 @@ func add_player(peer_id: int, player_name: String, car_id: String) -> void:
 		"score": 0,
 		"car_id": car_id
 	}
-	emit_signal("player_joined", peer_id)
+	player_joined.emit(peer_id)
 
 func remove_player(peer_id: int) -> void:
 	if players.has(peer_id):
 		players.erase(peer_id)
-		emit_signal("player_left", peer_id)
+		player_left.emit(peer_id)
 
 func set_player_ready(peer_id: int, ready: bool) -> void:
 	if players.has(peer_id):
 		players[peer_id]["ready"] = ready
-		emit_signal("player_ready_changed", peer_id, ready)
+		player_ready_changed.emit(peer_id, ready)
 
 func update_score(peer_id: int, score: int) -> void:
 	if players.has(peer_id):

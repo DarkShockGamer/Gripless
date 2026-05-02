@@ -64,7 +64,7 @@ func _ready() -> void:
 	else:
 		camera.enabled = false
 		set_physics_process(false)
-	_apply_car_data(SaveGame.selected_car if is_local else "car_starter")
+	# Car data applied via setup(); default stats remain until setup() is called
 
 func setup(p_id: int, car_id: String, local: bool) -> void:
 	peer_id = p_id
@@ -170,7 +170,7 @@ func _update_score(delta: float) -> void:
 		if drift_score_buffer >= 10.0:
 			drift_score += int(drift_score_buffer) * drift_combo
 			drift_score_buffer = 0.0
-			emit_signal("score_updated", drift_score)
+			score_updated.emit(drift_score)
 			NetworkManager.update_player_score.rpc(peer_id, drift_score)
 	else:
 		drift_score_buffer = 0.0
@@ -190,7 +190,7 @@ func sync_remote_state(pos: Vector2, rot: float, vel: Vector2, drifting: bool) -
 func apply_tandem_bonus() -> void:
 	drift_combo = min(drift_combo + 1, 5)
 	drift_score += 500 * drift_combo
-	emit_signal("score_updated", drift_score)
+	score_updated.emit(drift_score)
 	NetworkManager.update_player_score.rpc(peer_id, drift_score)
 
 func reset_to_spawn(spawn_pos: Vector2, spawn_rot: float) -> void:
