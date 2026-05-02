@@ -7,6 +7,8 @@ extends CanvasLayer
 @onready var drift_bar: ProgressBar = $HUDRoot/BottomCenter/DriftBar
 @onready var timer_label: Label = $HUDRoot/TopCenter/TimerLabel
 
+const MAX_SLIP_ANGLE_DEGREES := 60.0
+
 var _car: RigidBody2D = null
 
 func set_car(car: RigidBody2D) -> void:
@@ -18,7 +20,7 @@ func _process(_delta: float) -> void:
 	if _car == null:
 		return
 	speed_label.text = "%.0f km/h" % _car.speed_kmh
-	drift_bar.value = clamp(abs(_car.slip_angle) / 60.0 * 100.0, 0.0, 100.0)
+	drift_bar.value = clamp(abs(_car.slip_angle) / MAX_SLIP_ANGLE_DEGREES * 100.0, 0.0, 100.0)
 	tandem_label.visible = false  # toggled externally
 
 func _on_score_updated(score: int) -> void:

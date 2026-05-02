@@ -41,7 +41,11 @@ var _handbrake: bool = false
 var _throttle: float = 0.0
 var _steer: float = 0.0
 var _last_skid_pos: Vector2 = Vector2.ZERO
-var _skid_threshold: float = 30.0
+
+# Physics tuning constants
+const PHYSICS_FRAME_RATE := 60.0
+const DRIFT_SCORE_MULTIPLIER := 10.0
+const SPEED_NORMALIZATION_FACTOR := 100.0
 
 # Interpolation
 const INTERP_SPEED := 15.0
@@ -113,19 +117,19 @@ func _apply_drift_physics(delta: float) -> void:
 	# Steering (speed-sensitive)
 	var speed_ratio := clamp(abs(forward_vel) / max_speed, 0.0, 1.0)
 	var steer_amount := _steer * steering_angle * speed_ratio
-	rotation_degrees += steer_amount * delta * 60.0 * sign(forward_vel + 0.01)
+	rotation_degrees += steer_amount * delta * PHYSICS_FRAME_RATE * sign(forward_vel + 0.01)
 
 	# Throttle / braking force
 	var drive_dir := -transform.basis_xform(Vector2(0, 1))
 	if _throttle > 0.01:
-		apply_central_force(drive_dir * acceleration * _throttle * 60.0)
+		apply_central_force(drive_dir * acceleration * _throttle * PHYSICS_FRAME_RATE)
 	elif _throttle < -0.01:
-		apply_central_force(-drive_dir * brake_force * abs(_throttle) * 60.0)
+		apply_central_force(-drive_dir * brake_force * abs(_throttle) * PHYSICS_FRAME_RATE)
 
 	# Grip vs drift lateral correction
 	var current_grip := drift_factor if _handbrake else grip_factor
 	# Apply lateral correction force
-	var lateral_correction := -transform.basis_xform(Vector2(1, 0)) * lateral_vel * current_grip * 60.0
+	var lateral_correction := -transform.basis_xform(Vector2(1, 0)) * lateral_vel * current_grip * PHYSICS_FRAME_RATE
 	apply_central_force(lateral_correction)
 
 	# Slip angle detection
@@ -162,7 +166,7 @@ func _update_smoke() -> void:
 
 func _update_score(delta: float) -> void:
 	if is_drifting:
-		drift_score_buffer += abs(slip_angle) * (speed_kmh / 100.0) * delta * 10.0
+		drift_score_buffer += abs(slip_angle) * (speed_kmh / SPEED_NORMALIZATION_FACTOR) * delta * DRIFT_SCORE_MULTIPLIER
 		if drift_score_buffer >= 10.0:
 			drift_score += int(drift_score_buffer) * drift_combo
 			drift_score_buffer = 0.0
