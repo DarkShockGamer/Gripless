@@ -18,9 +18,9 @@ func _display_results() -> void:
 		var score_lbl := Label.new()
 		name_lbl.text = entry["name"] + (" (You)" if entry["peer_id"] == local_id else "")
 		name_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		name_lbl.theme_override_font_sizes = {"font_size": 24}
+		name_lbl.add_theme_font_size_override("font_size", 24)
 		score_lbl.text = str(entry["score"]) + " pts"
-		score_lbl.theme_override_font_sizes = {"font_size": 24}
+		score_lbl.add_theme_font_size_override("font_size", 24)
 		row.add_child(name_lbl)
 		row.add_child(score_lbl)
 		scores_container.add_child(row)
