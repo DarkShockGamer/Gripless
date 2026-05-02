@@ -62,7 +62,9 @@ func _on_peer_connected(peer_id: int) -> void:
 func _on_peer_disconnected(peer_id: int) -> void:
 	GameState.remove_player(peer_id)
 	player_disconnected.emit(peer_id)
-	notify_player_left.rpc(peer_id)
+	# Broadcast to remaining peers (not the disconnected one)
+	if multiplayer.is_server():
+		notify_player_left.rpc(peer_id)
 
 func _on_connected_to_server() -> void:
 	GameState.reset()

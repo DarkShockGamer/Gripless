@@ -37,10 +37,12 @@ func _load_track() -> void:
 		for child in track.get_children():
 			if child is Marker2D:
 				_spawn_points.append(child)
-		# Connect out-of-bounds
+		# Connect out-of-bounds with a short delay to avoid triggering on spawn
 		var oob := track.find_child("OutOfBounds", true, false)
 		if oob and oob is Area2D:
-			oob.body_entered.connect(_on_out_of_bounds)
+			get_tree().create_timer(2.0).timeout.connect(func():
+				oob.body_entered.connect(_on_out_of_bounds)
+			)
 
 func _spawn_cars() -> void:
 	var cars_node := Node2D.new()

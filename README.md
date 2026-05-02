@@ -65,6 +65,39 @@ shaders/
 - **Save**: JSON save file at `user://savegame.json`
 
 ---
+
+## Deploying to Railway (Optional / Advanced)
+
+Railway can run a dedicated headless host build so other players can join without keeping your PC on.
+
+### Steps
+
+1. **Export a Linux headless build** from Godot:
+   - *Project → Export → Add Preset → Linux/X11*
+   - Check **"Headless"** export mode (no display)
+   - Export as `gripless_server`
+
+2. **Create a `Dockerfile`** in the repo root:
+   ```dockerfile
+   FROM ubuntu:22.04
+   RUN apt-get update && apt-get install -y libgles2 libgl1 && rm -rf /var/lib/apt/lists/*
+   COPY gripless_server /app/gripless_server
+   COPY export/pck /app/gripless.pck
+   RUN chmod +x /app/gripless_server
+   EXPOSE 7777/udp
+   CMD ["/app/gripless_server", "--headless", "--", "--server"]
+   ```
+
+3. **Push to GitHub** and connect the repo to Railway.
+
+4. **Set Railway env vars**:
+   - `PORT=7777` (or use Railway's `$PORT` variable and pass it to the game)
+
+5. **Share the Railway public URL / IP** with players — they enter it in the JOIN screen.
+
+> **Note**: Railway's free tier uses TCP tunnels. ENet (UDP) may require the **paid** plan with a raw TCP/UDP port. As an alternative, consider [Godot's WebSocket transport](https://docs.godotengine.org/en/stable/tutorials/networking/high_level_multiplayer.html) for Railway compatibility.
+
+---
 _Original README below_
 
 # Gripless

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://car_scene_001"]
+[gd_scene load_steps=3 format=3 uid="uid://car_scene_001"]
 
 [ext_resource type="Script" path="res://scenes/car/Car.gd" id="1_car"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_car"]
+size = Vector2(40, 70)
 
 [node name="Car" type="RigidBody2D"]
 collision_layer = 2
@@ -11,7 +14,7 @@ angular_damp = 8.0
 script = ExtResource("1_car")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = RectangleShape2D.new()
+shape = SubResource("RectangleShape2D_car")
 
 [node name="BodyPoly" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-20, -35, 20, -35, 20, 35, -20, 35)

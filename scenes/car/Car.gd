@@ -58,20 +58,18 @@ const INTERP_SPEED := 15.0
 
 func _ready() -> void:
 	mass = mass_val
-	if is_local:
-		camera.enabled = true
-		set_physics_process(true)
-	else:
-		camera.enabled = false
-		set_physics_process(false)
-	# Car data applied via setup(); default stats remain until setup() is called
+	camera.enabled = false
+	# Physics process is enabled by setup(); keep it off until setup is called
+	set_physics_process(false)
 
 func setup(p_id: int, car_id: String, local: bool) -> void:
 	peer_id = p_id
 	is_local = local
 	_apply_car_data(car_id)
-	if local:
-		camera.enabled = true
+	camera.enabled = local
+	# Both local and remote cars need physics process:
+	# local → input + physics; remote → interpolation
+	set_physics_process(true)
 	# Configure MultiplayerSynchronizer authority
 	if sync_node:
 		sync_node.set_multiplayer_authority(p_id)
